@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import logo from "../../assets/logo-general.jfif";
+import { NavLink } from "react-router-dom";
 
 const NavBar = ({ cart_Total }) => {
   const classes = useStyles();
@@ -18,7 +19,13 @@ const NavBar = ({ cart_Total }) => {
     <>
       <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar>
-          <Typography variant="h6" className={classes.title} color="inherit">
+          <Typography
+            component={NavLink}
+            to="/"
+            variant="h6"
+            className={classes.title}
+            color="inherit"
+          >
             <img
               src={logo}
               alt="Ecommerce RD"
@@ -29,7 +36,12 @@ const NavBar = ({ cart_Total }) => {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.button}>
-            <IconButton aria-label="Show Cart Items" color="inherit">
+            <IconButton
+              aria-label="Show Cart Items"
+              color="inherit"
+              component={NavLink}
+              to="/cart"
+            >
               <Badge badgeContent={cart_Total} color="secondary">
                 <ShoppingCart />
               </Badge>

@@ -4,7 +4,12 @@ import useStyle from "./styles";
 import { NavLink } from "react-router-dom";
 import CartItem from "./CartItem/CartItem";
 
-const Cart = ({ cart, handleAddToCart, handleRemoveFromCart }) => {
+const Cart = ({
+  cart,
+  handleAddToCart,
+  handleRemoveFromCart,
+  handleEmptyCart,
+}) => {
   const classes = useStyle();
 
   // If cart.line_items.length > 0 = true : isEmpty = false
@@ -14,7 +19,7 @@ const Cart = ({ cart, handleAddToCart, handleRemoveFromCart }) => {
   const EmptyCart = () => {
     return (
       <Typography variant="subtitle1">
-        You have not Items in your shopping cart start adding some!, &nbsp;
+        You have not Items in your shopping cart start adding some!&nbsp;
         <NavLink to="/" exact="true" end={true} className={classes.link}>
           Start adding some Items
         </NavLink>
@@ -46,6 +51,7 @@ const Cart = ({ cart, handleAddToCart, handleRemoveFromCart }) => {
               type="button"
               variant="contained"
               color="secondary"
+              onClick={handleEmptyCart}
             >
               Empty Cart
             </Button>
