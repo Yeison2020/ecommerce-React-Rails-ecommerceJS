@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import Product from "../Product/Product";
 const products = [
@@ -7,11 +7,13 @@ const products = [
     id: 1,
     name: "Android Phone",
     description: "Best on the market",
+    price: "$10,000",
   },
   {
     id: 1,
     name: "Iphone Phones",
     description: "Highh quality",
+    price: "$10,000",
   },
 ];
 const Products = () => {

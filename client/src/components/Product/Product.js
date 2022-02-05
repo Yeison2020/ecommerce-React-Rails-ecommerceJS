@@ -5,22 +5,34 @@ import {
   CardContent,
   CardActions,
   Typography,
-  IconButtom,
+  IconButton,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
 
 const Product = ({ product }) => {
-  const { name } = product;
+  const { name, price, description } = product;
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardMedia className={classes.media} image="" title={name}></CardMedia>
       <CardContent>
         <div className={classes.cardContent}>
-          <Typography variant="h5" gutterBottom></Typography>
+          <Typography variant="h5" gutterBottom>
+            {name}
+          </Typography>
+
+          <Typography>{price}</Typography>
         </div>
+        <Typography variant="h2" color="textSecondary">
+          {description}
+        </Typography>
       </CardContent>
+      <CardActions disableSpacing className={classes.cardActions}>
+        <IconButton arial-label="Add to Cart">
+          <AddShoppingCart />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 };

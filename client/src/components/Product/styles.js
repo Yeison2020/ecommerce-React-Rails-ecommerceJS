@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-
+// Note: The styles have to be written in Camel Case with Material UI the name of CSS properties
 export default makeStyles(() => ({
   root: {
     maxWidth: "100%",
