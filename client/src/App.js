@@ -19,8 +19,7 @@ const App = () => {
   return (
     <div>
       <NavBar />
-
-      <Products />
+      <Products products={products} />
     </div>
   );
 };

@@ -2,25 +2,8 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import Product from "../Product/Product";
-const products = [
-  {
-    id: 1,
-    name: "Android Phone",
-    description: "Best on the market",
-    price: "$10,000",
-    image:
-      "https://media.wired.com/photos/6000ef46c724a79925642473/master/w_2394,h_1795,c_limit/Gear-Samsung-Galaxy-S21-colorways-SOURCE-Samsung.jpg.jpg",
-  },
-  {
-    id: 2,
-    name: "Iphone Phones",
-    description: "Highh quality",
-    price: "$10,000",
-    image:
-      "https://www.att.com/idpassets/global/devices/phones/apple/iphone-11/carousel/black/iPhone_11_Black_carousel.png",
-  },
-];
-const Products = () => {
+
+const Products = ({ products }) => {
   const classes = useStyles();
   return (
     <main className={classes.content}>
