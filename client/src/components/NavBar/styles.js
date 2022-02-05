@@ -21,6 +21,7 @@ export default makeStyles((theme) => ({
   image: {
     marginRight: "10px",
     height: "60px",
+    borderRadius: "20px",
   },
   menuButton: {
     marginRight: theme.spacing(2),

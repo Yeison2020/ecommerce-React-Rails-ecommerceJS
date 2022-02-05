@@ -10,7 +10,7 @@ import {
   Menu,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
-import logo from "../../assets/logoDR.png";
+import logo from "../../assets/logo-general.jfif";
 
 const NavBar = () => {
   const classes = useStyles();
@@ -25,7 +25,7 @@ const NavBar = () => {
               height="25px"
               className={classes.image}
             />
-            Ecommerce RD all In
+            Ecommerce RD
           </Typography>
           <div className={classes.grow} />
           <div className={classes.button}>
