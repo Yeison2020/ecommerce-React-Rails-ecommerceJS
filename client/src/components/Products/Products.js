@@ -8,12 +8,16 @@ const products = [
     name: "Android Phone",
     description: "Best on the market",
     price: "$10,000",
+    image:
+      "https://media.wired.com/photos/6000ef46c724a79925642473/master/w_2394,h_1795,c_limit/Gear-Samsung-Galaxy-S21-colorways-SOURCE-Samsung.jpg.jpg",
   },
   {
     id: 1,
     name: "Iphone Phones",
     description: "Highh quality",
     price: "$10,000",
+    image:
+      "https://www.att.com/idpassets/global/devices/phones/apple/iphone-11/carousel/black/iPhone_11_Black_carousel.png",
   },
 ];
 const Products = () => {

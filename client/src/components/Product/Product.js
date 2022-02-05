@@ -11,11 +11,16 @@ import { AddShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
 
 const Product = ({ product }) => {
-  const { name, price, description } = product;
+  // This the reommended way to extract those Elements from products props
+  const { name, price, description, image } = product;
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image="" title={name}></CardMedia>
+      <CardMedia
+        className={classes.media}
+        image={image}
+        title={name}
+      ></CardMedia>
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5" gutterBottom>
