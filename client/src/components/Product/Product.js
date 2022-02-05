@@ -11,7 +11,7 @@ import { AddShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
 import loading from "../../assets/Loading-image.png";
 
-const Product = ({ product }) => {
+const Product = ({ product, handleAddToCart }) => {
   // This the reommended way to extract those Elements from products props
   console.log(product);
   const { image } = product;
@@ -41,7 +41,7 @@ const Product = ({ product }) => {
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton arial-label="Add to Cart">
-          <AddShoppingCart />
+          <AddShoppingCart onClick={() => handleAddToCart(product.id, 1)} />
         </IconButton>
       </CardActions>
     </Card>
