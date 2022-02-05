@@ -12,7 +12,7 @@ const products = [
       "https://media.wired.com/photos/6000ef46c724a79925642473/master/w_2394,h_1795,c_limit/Gear-Samsung-Galaxy-S21-colorways-SOURCE-Samsung.jpg.jpg",
   },
   {
-    id: 1,
+    id: 2,
     name: "Iphone Phones",
     description: "Highh quality",
     price: "$10,000",
@@ -25,7 +25,7 @@ const Products = () => {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Grid container justify="center" spacing={4}>
+      <Grid container justifyContent="center" spacing={4}>
         {products.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
             <Product product={product} />
