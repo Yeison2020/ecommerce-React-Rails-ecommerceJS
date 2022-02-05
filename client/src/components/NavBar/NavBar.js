@@ -12,7 +12,7 @@ import {
 import { ShoppingCart } from "@material-ui/icons";
 import logo from "../../assets/logo-general.jfif";
 
-const NavBar = () => {
+const NavBar = ({ cart_Total }) => {
   const classes = useStyles();
   return (
     <>
@@ -30,7 +30,7 @@ const NavBar = () => {
           <div className={classes.grow} />
           <div className={classes.button}>
             <IconButton aria-label="Show Cart Items" color="inherit">
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={cart_Total} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>

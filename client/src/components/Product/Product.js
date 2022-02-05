@@ -40,8 +40,11 @@ const Product = ({ product, handleAddToCart }) => {
         />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton arial-label="Add to Cart">
-          <AddShoppingCart onClick={() => handleAddToCart(product.id, 1)} />
+        <IconButton
+          arial-label="Add to Cart"
+          onClick={() => handleAddToCart(product.id, 1)}
+        >
+          <AddShoppingCart />
         </IconButton>
       </CardActions>
     </Card>
