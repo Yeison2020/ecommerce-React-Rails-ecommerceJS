@@ -27,9 +27,9 @@ const Product = ({ product }) => {
             {name}
           </Typography>
 
-          <Typography>{price}</Typography>
+          <Typography variant="h5">{price}</Typography>
         </div>
-        <Typography variant="h2" color="textSecondary">
+        <Typography variant="h6" color="textSecondary">
           {description}
         </Typography>
       </CardContent>
