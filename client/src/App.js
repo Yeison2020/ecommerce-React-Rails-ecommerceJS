@@ -21,6 +21,18 @@ const App = () => {
     // Here I'm setting the cart after the item have been added to the cart
     setCart(item.cart);
   };
+  const handleUpdateCartQuantity = async (productId, quantity) => {
+    const { cart } = await commerce.cart.update(productId, {
+      quantity: quantity,
+    });
+    setCart(cart);
+    console.log(cart);
+  };
+
+  const handleRemoveFromCart = async (productId) => {
+    const { cart } = await commerce.cart.remove(productId);
+    setCart(cart);
+  };
   useEffect(() => {
     fecthProducts();
     fecthCart();
@@ -34,7 +46,11 @@ const App = () => {
     <div>
       <NavBar cart_Total={cart.total_items} />
       {/*<Products products={products} handleAddToCart={handleAddToCart} />*/}
-      <Cart cart={cart} />
+      <Cart
+        cart={cart}
+        handleAddToCart={handleUpdateCartQuantity}
+        handleRemoveFromCart={handleRemoveFromCart}
+      />
     </div>
   );
 };
