@@ -56,11 +56,13 @@ const Cart = ({
               Empty Cart
             </Button>
             <Button
+              component={NavLink}
               className={classes.checkoutButton}
               size="large"
               type="button"
               variant="contained"
               color="primary"
+              to="/checkout"
             >
               Check out
             </Button>
