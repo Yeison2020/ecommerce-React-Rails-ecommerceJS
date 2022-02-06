@@ -16,8 +16,8 @@ const PaymentForm = ({
   handleCaptureCheckout,
   nextStep,
 }) => {
-  const API_STRING = `"${process.env.STRIPE_PUBLIC_KEY}"`;
-  const stripePromise = loadStripe(API_STRING);
+  const API_KEY = `${process.env.STRIPE_PUBLIC_KEY}`;
+  const stripePromise = loadStripe(API_KEY);
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
     if (!stripe || !elements) return;
