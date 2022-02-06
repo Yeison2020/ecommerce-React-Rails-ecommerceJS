@@ -20,7 +20,7 @@ const Checkout = () => {
       <div className={classes.toolbar} />
       <main className={classes.layout}>
         <Paper>
-          <Typography variant="h4" align="center">
+          <Typography variant="h5" align="center">
             Check out
           </Typography>
           <Stepper activeStep={activeSteps} className={classes.stepper}>
