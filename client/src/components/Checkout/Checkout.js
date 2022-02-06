@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Paper,
   Stepper,
@@ -7,15 +7,33 @@ import {
   CircularProgress,
   Divider,
   Button,
+  CssBaseline,
   Typography,
 } from "@material-ui/core";
 import useStyles from "./styles";
 import PaymentForm from "./CheckoutForms/PaymentForm";
 import AddressForm from "./CheckoutForms/AddressForm";
+import { commerce } from "../../lib/commerce";
 
-const Checkout = () => {
+const Checkout = ({ cart }) => {
   // Notes: Confirmation can only be seen when activeSteps = 2
   const [activeSteps, setActiveSteps] = useState(0);
+  const [checkoutToken, setCheckoutToken] = useState(null);
+
+  // Creating a checkoutTokenID
+
+  useEffect(() => {
+    const generateToken = async () => {
+      try {
+        const token = await commerce.checkout.generateToken(cart.id, {
+          type: "cart",
+        });
+        setCheckoutToken(token);
+        console.log(token);
+      } catch (error) {}
+    };
+    generateToken();
+  }, [cart]);
 
   // Here I steps.lenght to render confirmation form
   const steps = ["Shipping Address", "Payment details"];
@@ -23,17 +41,26 @@ const Checkout = () => {
 
   // Functional components to return base on our current steps
 
-  const Form = () => (activeSteps === 0 ? <AddressForm /> : <PaymentForm />);
+  // When React renders: JSX render first and useEffect after, so I need to get my checkoutToken first and then <Form/>. Bug fixed : checkoutToken={checkoutToken}
+  const Form = () =>
+    activeSteps === 0 ? (
+      <AddressForm checkoutToken={checkoutToken} />
+    ) : (
+      <PaymentForm />
+    );
 
   // Will use confirmation form when the length of activeSteps === steps.length
+
+  // Classes.paper == give me a margin around my paper tag.
 
   const Confirmation = () => <h1>Confirmation</h1>;
 
   return (
     <>
+      <CssBaseline />
       <div className={classes.toolbar} />
       <main className={classes.layout}>
-        <Paper>
+        <Paper className={classes.paper}>
           <Typography variant="h5" align="center">
             Check out
           </Typography>
@@ -45,7 +72,11 @@ const Checkout = () => {
             ))}
           </Stepper>
 
-          {activeSteps === steps.length ? <Confirmation /> : <Form />}
+          {activeSteps === steps.length ? (
+            <Confirmation />
+          ) : (
+            checkoutToken && <Form />
+          )}
         </Paper>
       </main>
     </>
