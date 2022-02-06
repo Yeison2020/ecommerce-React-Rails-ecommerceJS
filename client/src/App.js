@@ -55,6 +55,7 @@ const App = () => {
         <Routes>
           <Route
             path="/cart"
+            exact
             element={
               <Cart
                 cart={cart}
@@ -66,11 +67,12 @@ const App = () => {
           ></Route>
           <Route
             path="/"
+            exact
             element={
               <Products products={products} handleAddToCart={handleAddToCart} />
             }
           />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" exact element={<Checkout />} />
         </Routes>
       </div>
     </Router>
