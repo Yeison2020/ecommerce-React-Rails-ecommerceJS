@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 const App = () => {
   const [products, setproducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   const fecthProducts = async () => {
     const { data } = await commerce.products.list();
@@ -38,6 +40,24 @@ const App = () => {
   const handleEmptyCart = async () => {
     const { cart } = await commerce.cart.empty();
     setCart(cart);
+  };
+
+  const handleCleanCart = async () => {
+    const newCart = await commerce.cart.refresh();
+    setCart(newCart);
+  };
+
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const inCommingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+      setOrder(inCommingOrder);
+      handleCleanCart();
+    } catch (error) {
+      setErrorMessage(error.data.error.message);
+    }
   };
   useEffect(() => {
     fecthProducts();
@@ -72,7 +92,18 @@ const App = () => {
               <Products products={products} handleAddToCart={handleAddToCart} />
             }
           />
-          <Route path="/checkout" exact element={<Checkout cart={cart} />} />
+          <Route
+            path="/checkout"
+            exact
+            element={
+              <Checkout
+                cart={cart}
+                order={order}
+                handleCaptureCheckout={handleCaptureCheckout}
+                errorMessage={errorMessage}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>

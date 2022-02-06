@@ -15,7 +15,7 @@ import PaymentForm from "./CheckoutForms/PaymentForm";
 import AddressForm from "./CheckoutForms/AddressForm";
 import { commerce } from "../../lib/commerce";
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, order, handleCaptureCheckout, errorMessage }) => {
   // Notes: Confirmation can only be seen when activeSteps = 2
   const [activeSteps, setActiveSteps] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
@@ -57,9 +57,11 @@ const Checkout = ({ cart }) => {
       <AddressForm checkoutToken={checkoutToken} next={next} />
     ) : (
       <PaymentForm
+        handleCaptureCheckout={handleCaptureCheckout}
         shippingData={shippingData}
         backStep={backStep}
         checkoutToken={checkoutToken}
+        nextStep={nextStep}
       />
     );
 
