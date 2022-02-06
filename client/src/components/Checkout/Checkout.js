@@ -19,6 +19,7 @@ const Checkout = ({ cart }) => {
   // Notes: Confirmation can only be seen when activeSteps = 2
   const [activeSteps, setActiveSteps] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [shippingData, setshippingData] = useState({});
 
   // Creating a checkoutTokenID
 
@@ -41,12 +42,25 @@ const Checkout = ({ cart }) => {
 
   // Functional components to return base on our current steps
 
+  const nextStep = () => setActiveSteps((prev) => prev + 1);
+  const backStep = () => setActiveSteps((prev) => prev - 1);
+
+  const next = (data) => {
+    setshippingData(data);
+    // This funtion reach the lenght of active steps
+    nextStep();
+  };
+
   // When React renders: JSX render first and useEffect after, so I need to get my checkoutToken first and then <Form/>. Bug fixed : checkoutToken={checkoutToken}
   const Form = () =>
     activeSteps === 0 ? (
-      <AddressForm checkoutToken={checkoutToken} />
+      <AddressForm checkoutToken={checkoutToken} next={next} />
     ) : (
-      <PaymentForm />
+      <PaymentForm
+        shippingData={shippingData}
+        backStep={backStep}
+        checkoutToken={checkoutToken}
+      />
     );
 
   // Will use confirmation form when the length of activeSteps === steps.length

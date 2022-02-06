@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import {
   InputLabel,
   Select,
@@ -11,7 +12,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import CustomTextField from "./CustomTextField";
 // Fetch Al feautures from commerce
 import { commerce } from "../../../lib/commerce";
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next, backStep }) => {
   // Setting the state as soon address form renders
   // 1 Countries
   const [shippingCountries, setshippingCountries] = useState([]);
@@ -95,9 +96,9 @@ const AddressForm = ({ checkoutToken }) => {
       );
   }, [shippingSubdivision]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
   console.log(methods);
   return (
     <>
@@ -105,60 +106,80 @@ const AddressForm = ({ checkoutToken }) => {
         Shipping Address
       </Typography>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit} />
-        <Grid container spacing={3}>
-          <CustomTextField name="firstName" label="First name" />
-          <CustomTextField name="lastname" label="Last name" />
-          <CustomTextField name="address1" label="Address" />
-          <CustomTextField name="email" label="Email" />
-          <CustomTextField name="city" label="City" />
-          <CustomTextField name="Zip" label="ZIP / Postal code" />
+        <form
+          onSubmit={methods.handleSubmit((data) =>
+            next({
+              ...data,
+              shippingCountry,
+              shippingSubdivision,
+              shippingOption,
+            })
+          )}
+        >
+          <Grid container spacing={3}>
+            <CustomTextField name="firstName" label="First name" />
+            <CustomTextField name="lastname" label="Last name" />
+            <CustomTextField name="address1" label="Address" />
+            <CustomTextField name="email" label="Email" />
+            <CustomTextField name="city" label="City" />
+            <CustomTextField name="Zip" label="ZIP / Postal code" />
 
-          <Grid item xs={12} sm={6}>
-            <InputLabel>Shipping Country</InputLabel>
-            <Select
-              value={shippingCountry}
-              fullWidth
-              onChange={(e) => {
-                setshippingCountry(e.target.value);
-              }}
-            >
-              {countries.map((country) => (
-                <MenuItem key={country.id} value={country.id}>
-                  {country.label}
-                </MenuItem>
-              ))}
-            </Select>
+            <Grid item xs={12} sm={6}>
+              <InputLabel>Shipping Country</InputLabel>
+              <Select
+                value={shippingCountry}
+                fullWidth
+                onChange={(e) => {
+                  setshippingCountry(e.target.value);
+                }}
+              >
+                {countries.map((country) => (
+                  <MenuItem key={country.id} value={country.id}>
+                    {country.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <InputLabel>Shipping Subdivision</InputLabel>
+              <Select
+                value={shippingSubdivision}
+                fullWidth
+                onChange={(e) => setshippingSubdivision(e.target.value)}
+              >
+                {subdivisions.map((subdivision) => (
+                  <MenuItem key={subdivision.id} value={subdivision.id}>
+                    {subdivision.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <InputLabel>Shipping Options</InputLabel>
+              <Select
+                value={shippingOption}
+                fullWidth
+                onChange={(e) => setshippingOption(e.target.value)}
+              >
+                {options.map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel>Shipping Subdivision</InputLabel>
-            <Select
-              value={shippingSubdivision}
-              fullWidth
-              onChange={(e) => setshippingSubdivision(e.target.value)}
-            >
-              {subdivisions.map((subdivision) => (
-                <MenuItem key={subdivision.id} value={subdivision.id}>
-                  {subdivision.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel>Shipping Options</InputLabel>
-            <Select
-              value={shippingOption}
-              fullWidth
-              onChange={(e) => setshippingOption(e.target.value)}
-            >
-              {options.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-        </Grid>
+          <br />
+
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button variant="outlined" component={NavLink} to="/cart">
+              Back to cart
+            </Button>
+            <Button variant="outlined" type="submit" color="primary">
+              Next
+            </Button>
+          </div>
+        </form>
       </FormProvider>
     </>
   );
