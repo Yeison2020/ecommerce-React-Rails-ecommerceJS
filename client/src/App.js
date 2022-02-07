@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { NavBar, Products, Cart, Checkout } from "./components";
 import { commerce } from "./lib/commerce";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
+import useStyles from "./styles";
 
 const App = () => {
   const [products, setproducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const classes = useStyles();
 
   const fecthProducts = async () => {
     const { data } = await commerce.products.list();
@@ -71,7 +72,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="body-styles">
+      <div className={classes.body}>
         <NavBar cart_Total={cart.total_items} />
         <Routes>
           <Route
