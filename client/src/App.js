@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavBar, Products, Cart, Checkout } from "./components";
 import { commerce } from "./lib/commerce";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 
 const App = () => {
   const [products, setproducts] = useState([]);
@@ -70,7 +71,7 @@ const App = () => {
 
   return (
     <Router>
-      <div>
+      <div className="body-styles">
         <NavBar cart_Total={cart.total_items} />
         <Routes>
           <Route
