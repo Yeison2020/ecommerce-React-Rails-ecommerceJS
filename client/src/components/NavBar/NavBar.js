@@ -17,7 +17,7 @@ const NavBar = ({ cart_Total }) => {
   const classes = useStyles();
   return (
     <>
-      <AppBar position="fixed" className={classes.appBar} color="inherit">
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography
             component={NavLink}
